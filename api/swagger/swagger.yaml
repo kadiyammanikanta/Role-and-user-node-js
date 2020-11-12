@@ -1,0 +1,315 @@
+swagger: "2.0"
+info:
+  version: "0.0.1"
+  title: m-portal
+# during dev, should point to your local machine
+host: localhost:8000
+# basePath prefixes all resource paths 
+basePath: /
+# 
+schemes:
+  # tip: remove http to make production-grade
+  - http
+  - https
+# format of bodies a client can send (Content-Type)
+consumes:
+  - application/json
+# format of the responses to the client (Accepts)
+produces:
+  - application/json
+paths:
+  /login:
+    x-swagger-router-controller: user_controller
+    get:
+      description: Returns 'user' details
+      operationId: login
+      parameters:
+        - name: username
+          in: query
+          description: user name of the login person
+          required: true
+          type: string
+        - name: password
+          in: query
+          description: password of the login person
+          required: true
+          type: string
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/HelloWorldResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /saveUser:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: user_controller
+    post:
+      description: Returns 'Hello' to the caller
+      # used as the method name of the controller
+      operationId: saveUser
+      parameters:
+        - in: body
+          name: user
+          required: true
+          schema:
+            type: object
+            required:
+              - name
+            properties:
+              name:
+                type: string
+              password:
+                type: string
+              email:
+                type: string
+              role:
+                type: string
+          description: The name of the person to whom to say hello
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/HelloWorldResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /updateUser:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: user_controller
+    put:
+      description: Returns 'Hello' to the caller
+      # used as the method name of the controller
+      operationId: updateUser
+      parameters:
+        - in: body
+          name: user
+          required: true
+          schema:
+            type: object
+            required:
+              - id
+            properties:
+              id:
+                type: integer
+              name:
+                type: string
+              password:
+                type: string
+              email:
+                type: string
+              role:
+                type: string
+          description: The name of the person to whom to say hello
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/HelloWorldResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /getUserList:
+    x-swagger-router-controller: user_controller
+    get:
+      description: Returns 'user' details
+      operationId: getUsers
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/HelloWorldResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse" 
+  /deleteUser:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: user_controller
+    delete:
+      description: Returns 'Hello' to the caller
+      # used as the method name of the controller
+      operationId: deleteUser
+      parameters:
+        - name: userId
+          in: query
+          description: The id of the person to whom to delete
+          required: false
+          type: string
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/HelloWorldResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /getRoleListDropDown:
+    x-swagger-router-controller: role_controller
+    get:
+      description: Returns 'user' details
+      operationId: getRoles
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/HelloWorldResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"          
+  /getRoleList:
+    x-swagger-router-controller: role_controller
+    get:
+      description: Returns 'user' details
+      operationId: getRolesList
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/HelloWorldResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /saveRole:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: role_controller
+    post:
+      description: Returns 'Hello' to the caller
+      # used as the method name of the controller
+      operationId: saveRole
+      parameters:
+        - in: body
+          name: role
+          required: true
+          schema:
+            type: object
+            required:
+              - name
+            properties:
+              name:
+                type: string
+              pageid  :
+                type: string
+          description: The name of the person to whom to say hello
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/HelloWorldResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse" 
+  /updateRole:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: role_controller
+    put:
+      description: Returns 'Hello' to the caller
+      # used as the method name of the controller
+      operationId: updateRole
+      parameters:
+        - in: body
+          name: role
+          required: true
+          schema:
+            type: object
+            required:
+              - id
+            properties:
+              id:
+                type: integer
+              name:
+                type: string  
+              pageid:
+                type: string
+          description: The name of the person to whom to say hello
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/HelloWorldResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /deleteRole:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: role_controller
+    delete:
+      description: Returns 'Hello' to the caller
+      # used as the method name of the controller
+      operationId: deleteRole
+      parameters:
+        - name: roleId
+          in: query
+          description: The id of the person to whom to delete
+          required: false
+          type: string
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/HelloWorldResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse" 
+  /getPageList:
+    x-swagger-router-controller: role_controller
+    get:
+      description: Returns 'user' details
+      operationId: getPage
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/HelloWorldResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"                                                          
+  /swagger:
+    x-swagger-pipe: swagger_raw
+# complex objects have schema definitions
+definitions:
+  HelloWorldResponse:
+    required:
+      - message
+    properties:
+      message:
+        type: string
+  ErrorResponse:
+    required:
+      - message
+    properties:
+      message:
+        type: string

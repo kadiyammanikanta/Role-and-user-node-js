@@ -1,0 +1,31 @@
+{
+  "name": "m-portal-node",
+  "version": "0.0.1",
+  "private": true,
+  "description": "New Swagger API Project",
+  "keywords": [],
+  "author": "",
+  "license": "",
+  "main": "app.js",
+  "dependencies": {
+    "co": "^4.6.0",
+    "connect": "^3.3.5",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "fs": "0.0.1-security",
+    "http": "0.0.1-security",
+    "js-yaml": "^3.14.0",
+    "nodemon": "^2.0.5",
+    "pg": "^8.4.1",
+    "swagger-tools": "^0.10.4"
+  },
+  "devDependencies": {
+    "should": "^7.1.0",
+    "supertest": "^5.0.0"
+  },
+  "scripts": {
+    "start": "nodemon node app.js",
+    "test": "swagger project test"
+  }
+}
